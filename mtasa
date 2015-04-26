@@ -4,7 +4,7 @@ releaseOS=$(gawk -F= '/^NAME/{print $2}' /etc/os-release)
 releaseArch=$(uname -m)
 serverRunning=$(ps cax | grep mta-server)
 if [ -d ~/.mtasa ]; then
-    if [ $serverRunning == *"mta-server"* ]; then
+    if [[ $serverRunning == *"mta-server"* ]]; then
       while true; do
         read -p "   MTA:SA Server is already running. Do you want to stop it? [y/n]" yn
         case $yn in
