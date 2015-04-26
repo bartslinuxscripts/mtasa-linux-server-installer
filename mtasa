@@ -4,6 +4,7 @@ releaseOS=$(gawk -F= '/^NAME/{print $2}' /etc/os-release)
 releaseArch=$(uname -m)
 serverRunning=$(ps cax | grep mta-server)
 if [ -d ~/.mtasa ]; then
+  if [ $releaseArch == "i686" ]; then
     if [[ $serverRunning == *"mta-server"* ]]; then
       while true; do
         read -p "   MTA:SA Server is already running. Do you want to stop it? [y/n]" yn
@@ -17,6 +18,21 @@ if [ -d ~/.mtasa ]; then
       echo -e "\033[32m   Server has been started.\033[37m"
       ~/.mtasa/multitheftauto_linux-1.4.1/mta-server >/dev/null 2>&1 &
     fi
+  elif [ $releaseArch == "x86_64" ]; then
+    if [[ $serverRunning == *"mta-server"* ]]; then
+      while true; do
+        read -p "   MTA:SA Server is already running. Do you want to stop it? [y/n]" yn
+        case $yn in
+          [Yy]* ) pkill mta-server; echo -e "\033[32m   Server has been stopped.\033[37m"; break;;
+          [Nn]* ) exit;;
+          * ) echo "Please answer yes or no."
+        esac
+      done
+    else
+      echo -e "\033[32m   Server has been started.\033[37m"
+      ~/.mtasa/multitheftauto_linux_x64-1.4.1/mta-server >/dev/null 2>&1 &
+    fi
+  fi
   exit
 fi
 echo -e "\033[37m"
@@ -90,4 +106,8 @@ fi
 echo -e "\033[32m   Done!"
 echo -e "\033[37m"
 echo -e " * Starting server for the first time.. "
-~/.mtasa/multitheftauto_linux-1.4.1/mta-server >/dev/null 2>&1 &
+if [ $releaseArch == "i686" ]; then
+  ~/.mtasa/multitheftauto_linux-1.4.1/mta-server >/dev/null 2>&1 &
+elif [ $releaseArch == "x86_64" ]; then
+  ~/.mtasa/multitheftauto_linux_x64-1.4.1/mta-server >/dev/null 2>&1 &
+fi

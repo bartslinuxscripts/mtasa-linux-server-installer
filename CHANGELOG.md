@@ -3,3 +3,6 @@ v0.1.0
 
 v0.1.1
  - Small bug fix.
+
+v0.1.2
+ - Fixed OS architecture detection.
