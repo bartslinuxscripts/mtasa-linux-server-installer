@@ -9,3 +9,6 @@ v0.1.2
 
 v0.1.3
  - Small bug fix.
+
+v0.1.4
+ - Added server start confirmation.
