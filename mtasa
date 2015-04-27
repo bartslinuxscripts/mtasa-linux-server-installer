@@ -37,7 +37,7 @@ if [ -d ~/.mtasa ]; then
 fi
 echo -e "\033[37m"
 echo " ╔═══════════════════════════════════════════════════════╗"
-echo " ║ Bart's Linux Tutorials ║ MTA:SA Server Installer      ║"
+echo " ║ Bart's Linux Scripts ║ MTA:SA Server Installer        ║"
 echo " ╚═══════════════════════════════════════════════════════╝"
 echo " ╔═══════════════════════════════════════════════════════╗"
 echo -e " ║ ! ║                  Use \033[32m./mtasa \033[37mto start/stop server ║"
@@ -67,9 +67,9 @@ fi
 
 echo -e " * Checking if wget is installed.. "
 if [ $osRoot == "yum" ]; then
-  yum -y install wget > /dev/null
+  yum -y install wget unzip > /dev/null
 elif [ $osRoot == "apt" ]; then
-  apt-get -y install wget > /dev/null
+  apt-get -y install wget unzip > /dev/null
 fi
 echo -e "\033[32m   Done!"
 echo -e "\033[37m"
@@ -102,6 +102,36 @@ if [ $releaseArch == "x86_64" ]; then
 elif [ $releaseArch == "i686" ]; then
   cd ~/.mtasa
   tar -xzf multitheftauto_linux-1.4.1.tar.gz
+fi
+echo -e "\033[32m   Done!"
+echo -e "\033[37m"
+echo -e " * Downloading and unpacking config files and resources.. "
+if [ $releaseArch == "x86_64" ]; then
+  cd ~/.mtasa/multitheftauto_linux_x64-1.4.1/mods/deathmatch
+  wget -q http://linux.mtasa.com/dl/141/baseconfig-1.4.1.tar.gz
+  tar -xzf baseconfig-1.4.1.tar.gz
+  rm baseconfig-1.4.1.tar.gz
+  cd ~/.mtasa/multitheftauto_linux_x64-1.4.1/mods/deathmatch/baseconfig
+  mv * ..
+  cd ..
+  rm -rf baseconfig
+  mkdir ~/.mtasa/multitheftauto_linux_x64-1.4.1/mods/deathmatch/resources
+  cd ~/.mtasa/multitheftauto_linux_x64-1.4.1/mods/deathmatch/resources
+  wget -q http://mirror.mtasa.com/mtasa/resources/mtasa-resources-latest.zip
+  unzip -qq mtasa-resources-latest.zip
+elif [ $releaseArch == "i686" ]; then
+  cd ~/.mtasa/multitheftauto_linux-1.4.1/mods/deathmatch
+  wget -q http://linux.mtasa.com/dl/141/baseconfig-1.4.1.tar.gz
+  tar -xzf baseconfig-1.4.1.tar.gz
+  rm baseconfig-1.4.1.tar.gz
+  cd ~/.mtasa/multitheftauto_linux-1.4.1/mods/deathmatch/baseconfig
+  mv * ..
+  cd ..
+  rm -rf baseconfig
+  mkdir ~/.mtasa/multitheftauto_linux-1.4.1/mods/deathmatch/resources
+  cd ~/.mtasa/multitheftauto_linux-1.4.1/mods/deathmatch/resources
+  wget -q http://mirror.mtasa.com/mtasa/resources/mtasa-resources-latest.zip
+  unzip -qq mtasa-resources-latest.zip
 fi
 echo -e "\033[32m   Done!"
 echo -e "\033[37m"

@@ -15,3 +15,6 @@ v0.1.4
 
 v0.1.5
  - Added configuration and resources installation.
+
+v0.1.6
+ - Same as previous version.
