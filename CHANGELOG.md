@@ -12,3 +12,6 @@ v0.1.3
 
 v0.1.4
  - Added server start confirmation.
+
+v0.1.5
+ - Added configuration and resources installation.
